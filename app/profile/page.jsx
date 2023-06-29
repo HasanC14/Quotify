@@ -19,7 +19,7 @@ const page = () => {
             }
         };
         if (session?.user.id) { fetchPosts() }
-    }, []);
+    }, [session, router]);
     const HandleEdit = (post) => {
         router.push(`/update_post?id=${post._id}`)
     }

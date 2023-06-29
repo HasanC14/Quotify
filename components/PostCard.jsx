@@ -29,14 +29,15 @@ const PostCard = ({ post, HandleTag, HandleEdit, HandleDelete }) => {
                         className="rounded-full object-contain"
                     />
                     <div className="flex flex-col ">
-                        <h3 className="font-satoshi font-semibold text-gray-900">{post.creator.username}</h3>
+                        <h3 className="font-satoshi font-semibold text-gray-200">{post.creator.username}</h3>
                         <p className="font-inter text-sm text-gray-400">{post.creator.email}</p>
                     </div>
                 </div>
                 <div className="copy_btn" onClick={HandleCopy}>
                     <Image
+                        alt="copy and tick"
                         src={Copy == post.quote ?
-                            '/:assets/icons/tick.svg' :
+                            '/assets/icons/tick.svg' :
                             '/assets/icons/copy.svg'}
                         width={12}
                         height={12}
@@ -44,7 +45,7 @@ const PostCard = ({ post, HandleTag, HandleEdit, HandleDelete }) => {
 
                 </div>
             </div>
-            <p className="my-4 font-satoshi text-sm text-gray-500">{post.quote}</p>
+            <p className="my-4 font-satoshi text-sm text-gray-300">{post.quote}</p>
             <p
                 className="cursor-pointer font-inter text-sm blue_gradient"
                 onClick={() => HandleTag && HandleTag(post.tag)}

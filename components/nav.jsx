@@ -20,13 +20,14 @@ const nav = () => {
     return (
         <nav className='flex-between w-full mb-16 pt-3'>
             <Link href='/'>
-                <Image
+                <p className='font-mono blue_gradient text-2xl'> ❝Quotify❞</p>
+                {/* <Image
                     src='/assets/images/logo.png'
                     alt='logo'
                     width={50}
                     height={70}
                     className='object-container'
-                />
+                /> */}
             </Link>
 
             {/* Desktop Navigation */}
@@ -37,7 +38,7 @@ const nav = () => {
                             Create Post
                         </Link>
 
-                        <button type='button' onClick={signOut} className='outline_btn'>
+                        <button type='button' onClick={signOut} className='black_btn'>
                             Sign Out
                         </button>
 
