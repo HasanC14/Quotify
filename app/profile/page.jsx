@@ -3,6 +3,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Profile from '@components/profile';
+
 const page = () => {
     const { data: session } = useSession()
     const [Posts, setPosts] = useState([])
@@ -22,8 +23,14 @@ const page = () => {
     const HandleEdit = (post) => {
         router.push(`/update_post?id=${post._id}`)
     }
-    const HandleDelete = (post) => {
-
+    const HandleDelete = async (post) => {
+        const hasConfirmed = confirm('Are you sure you want to delete the post')
+        if (hasConfirmed) {
+            fetch(`/api/post/${post._id.toString()}`,
+                { method: 'DELETE' })
+        }
+        const FilteredPosts = Posts.filter((p) => { p._id === post._id })
+        setPosts(FilteredPosts)
     }
     return (
         <Profile
