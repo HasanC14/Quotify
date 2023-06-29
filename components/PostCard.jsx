@@ -6,7 +6,10 @@ import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
 const PostCard = ({ post, HandleTag, HandleEdit, HandleDelete }) => {
+
     const [Copy, setCopy] = useState('')
+    const { data: session } = useSession()
+    const pathname = usePathname()
     const HandleCopy = () => {
         setCopy(post.quote)
         navigator.clipboard.writeText(post.quote)
@@ -20,6 +23,7 @@ const PostCard = ({ post, HandleTag, HandleEdit, HandleDelete }) => {
                 <div className="flex justify-start items-center gap-3 cursor-pointer">
                     <Image
                         src={post.creator.image}
+                        alt="Profile image"
                         height={40}
                         width={40}
                         className="rounded-full object-contain"
@@ -45,6 +49,21 @@ const PostCard = ({ post, HandleTag, HandleEdit, HandleDelete }) => {
                 className="cursor-pointer font-inter text-sm blue_gradient"
                 onClick={() => HandleTag && HandleTag(post.tag)}
             >#{post.tag}</p>
+
+            {session?.user.id === post.creator._id && pathname === '/profile' && (
+                <div className="mt-5 flex-center border-t pt-3 gap-4 border-gray-300">
+                    <p
+                        className="font-inter text-sm green_gradient cursor-pointer"
+                        onClick={HandleEdit}>
+                        Edit
+                    </p>
+                    <p
+                        className="font-inter text-sm text-red-600 cursor-pointer"
+                        onClick={HandleDelete}>
+                        Delete
+                    </p>
+                </div>
+            )}
         </div>
     );
 };
